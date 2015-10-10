@@ -2,6 +2,7 @@ package com.bignerdranch.android.runtracker;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class RunFragment extends Fragment {
 
     private Button startButton;
     private Button stopButton;
+    private Button mapButton;
     private TextView startedTextView, latitudeTextView,
             longitudeTextView, altitudeTextView, durationTextView;
 
@@ -108,6 +110,18 @@ public class RunFragment extends Fragment {
             }
         });
 
+        mapButton = (Button) view.findViewById(R.id.run_mapButton);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra(RunMapActivity.EXTRA_RUN_ID, run.getId());
+                startActivity(intent);
+            }
+        });
+
+        updateUI();
+
         return view;
     }
 
@@ -139,12 +153,16 @@ public class RunFragment extends Fragment {
             latitudeTextView.setText(Double.toString(lastLocation.getLatitude()));
             longitudeTextView.setText(Double.toString(lastLocation.getLongitude()));
             altitudeTextView.setText(Double.toString(lastLocation.getAltitude()));
+            mapButton.setEnabled(true);
+        } else {
+            mapButton.setEnabled(false);
         }
 
         durationTextView.setText(Run.formatDuration(durationSeconds));
 
         startButton.setEnabled(!started);
         stopButton.setEnabled(started && trackingThisRun);
+
     }
 
     private class RunLoaderCallbacks implements LoaderManager.LoaderCallbacks<Run> {

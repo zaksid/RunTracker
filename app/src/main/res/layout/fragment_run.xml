@@ -8,7 +8,7 @@
 
         <TextView
             style="@style/TextViewLabel"
-            android:text="@string/started"/>
+            android:text="@string/started" />
 
         <TextView
             android:id="@+id/run_startedTextView"
@@ -79,5 +79,10 @@
             android:id="@+id/run_stopButton"
             style="@style/Button"
             android:text="@string/stop" />
+
+        <Button
+            android:id="@+id/run_mapButton"
+            style="@style/Button"
+            android:text="@string/map" />
     </LinearLayout>
 </TableLayout>

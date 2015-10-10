@@ -79,6 +79,10 @@ public class RunManager {
         return location;
     }
 
+    public RunDatabaseHelper.LocationCursor queryLocationsForRun(long runId) {
+        return helper.queryLocationsForRun(runId);
+    }
+
     public void insertLocation(Location location) {
         if (currentRunId != -1) {
             helper.insertLocation(currentRunId, location);
